@@ -1,4 +1,77 @@
 {
   "lastUpdated": "2026-07-01",
-  "news": []
+  "news": [
+    {
+      "titleJa": "インバル・メギド、2026年に2作のアルバムをリリース予定",
+      "summaryJa": "チェリストのインバル・メギドが、Atollレーベルより2026年中に2作品を発表予定。クララ・シューマン作品集と、ナチスにより活動を封じられた「禁じられた作曲家たち」をテーマにしたアルバム。",
+      "url": "https://theviolinchannel.com/cellist-inbal-megiddos-album-bachs-cello-suites/",
+      "source": "The Violin Channel",
+      "date": "2026-01-01",
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "titleJa": "ガスパール・クラウス、新アルバム「Cells」を発表",
+      "summaryJa": "フランス人チェリスト・作曲家のガスパール・クラウスが新アルバム「Cells」を9月25日にInFinéよりリリース。マット・エリオットとのコラボレーションを含み、18か月かけて制作された作品。",
+      "url": "https://www.clashmusic.com/news/acclaimed-cellist-gaspar-claus-announces-new-album-cells/",
+      "source": "Clash Magazine",
+      "date": "2026-09-25",
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "titleJa": "2026年UWチェロフェスティバル、ズラトミール・ファンが出演",
+      "summaryJa": "ワイオミング大学で開催される2026年チェロフェスティバルに、若手チェリストのズラトミール・ファンが出演。リハーサルやワークショップに加え、ナタリー・ハースとのガラ・リサイタルで締めくくられる。",
+      "url": "https://www.uwyo.edu/music/cello_festival/index.html",
+      "source": "University of Wyoming",
+      "date": "2026-03-01",
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "titleJa": "人気チェリストHAUSER、健康問題で2026年ツアーを中止",
+      "summaryJa": "クロアチア出身のチェリスト、ステパン・ハウザー（HAUSER）が、インド・中東・ヨーロッパで予定していた2026年の残りのツアーを健康上の理由により中止すると発表した。",
+      "url": "https://entertainmentnow.com/music/croatian-cellist-stjepan-hauser-cancels-2026-tour-health-update/",
+      "source": "Entertainment Now",
+      "date": "2026-01-15",
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "titleJa": "ジュリアン・ロイド・ウェバー、75歳記念公演でステージ復帰",
+      "summaryJa": "チェリストのジュリアン・ロイド・ウェバーが2026年4月、ウィグモア・ホールで公演。75歳の誕生日と自伝出版を記念し、Music Masters慈善団体支援のための演奏会となる。",
+      "url": "https://www.thestrad.com/news/cellist-julian-lloyd-webber-to-return-to-the-stage-in-2026/20633.article",
+      "source": "The Strad",
+      "date": "2026-04-01",
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "titleJa": "ヨーヨー・マ、ソロリサイタルを開催",
+      "summaryJa": "ヨーヨー・マが2026年2月3日、ワシントンDCのストラスモア音楽センターで稀少なソロリサイタルを実施。バッハの無伴奏組曲と、彼が支援してきた現代作曲家の作品を組み合わせたプログラムを披露した。",
+      "url": "https://www.washingtonperformingarts.org/event/yo-yo-ma-26/",
+      "source": "Washington Performing Arts",
+      "date": "2026-02-03",
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "titleJa": "ハチャトゥリアン国際コンクール2026、ドイツ人チェリストが優勝",
+      "summaryJa": "アルメニア・エレバンで開催されたハチャトゥリアン国際コンクールで、24歳のドイツ人チェリスト、コジマ・レジーナ・フェデルレが優勝。賞金1万ドルと演奏機会を獲得した。",
+      "url": "https://www.thestrad.com/news/cello-winners-announced-for-the-2026-khachaturian-international-competition/21438.article",
+      "source": "The Strad",
+      "date": "2026-06-13",
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "titleJa": "クラシック・チェロ国際コンクール2026、優勝者発表",
+      "summaryJa": "ロンドンの王立音楽大学で開催されたクラシック・チェロ国際コンクール2026で、ジョン・ア・キムが優勝。2位はイ・ジュン・パク、3位はアルチョム・イオアニシャンとなった。",
+      "url": "https://theviolinchannel.com/classic-cello-international-competition-2026-names-winners-jung-a-kim/",
+      "source": "The Violin Channel",
+      "date": "2026-04-06",
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "titleJa": "クイーン・エリザベート国際チェロコンクール2026、結果発表",
+      "summaryJa": "ブリュッセルで開催された2026年クイーン・エリザベート国際チェロコンクールで、イタリアの23歳チェリスト、エットーレ・パガーノが優勝。賞金2.5万ユーロとカザルス財団所有の1733年製ゴフリラー「カザルス」の4年間貸与を獲得した。",
+      "url": "https://www.thestrad.com/news/results-announced-at-the-2026-queen-elisabeth-cello-competition/21391.article",
+      "source": "The Strad",
+      "date": "2026-05-01",
+      "dateAdded": "2026-07-01"
+    }
+  ]
 }
