@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チェロ マスタークラス・公開レッスン動画</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #1a1a2e; color: #eee; min-height: 100vh; }
+        header { background: #16213e; padding: 24px; text-align: center; border-bottom: 2px solid #0f3460; }
+        h1 { font-size: 1.6rem; color: #e94560; margin-bottom: 4px; }
+        .subtitle { color: #aaa; font-size: 0.9rem; }
+        .search-section { padding: 20px; max-width: 800px; margin: 0 auto; }
+        #searchBox { width: 100%; padding: 12px 16px; font-size: 1rem; border-radius: 8px; border: 1px solid #0f3460; background: #16213e; color: #eee; outline: none; }
+        #searchBox:focus { border-color: #e94560; }
+        .alpha-nav { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 20px; max-width: 800px; margin: 0 auto 20px; }
+        .alpha-btn { padding: 6px 10px; background: #16213e; border: 1px solid #0f3460; color: #aaa; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+        .alpha-btn:hover, .alpha-btn.active { background: #e94560; color: white; border-color: #e94560; }
+        .content { max-width: 800px; margin: 0 auto; padding: 0 20px 40px; }
+        .composer-section { margin-bottom: 32px; }
+        .composer-name { font-size: 1.2rem; font-weight: bold; color: #e94560; padding: 8px 0; border-bottom: 1px solid #0f3460; margin-bottom: 16px; }
+        .composer-name span { color: #888; font-size: 0.9rem; font-weight: normal; margin-left: 8px; }
+        .video-card { display: flex; gap: 12px; margin-bottom: 12px; background: #16213e; border-radius: 8px; padding: 12px; text-decoration: none; color: inherit; transition: background 0.2s; }
+        .video-card:hover { background: #0f3460; }
+        .thumbnail { width: 120px; height: 68px; object-fit: cover; border-radius: 4px; flex-shrink: 0; background: #0f3460; }
+        .video-info { flex: 1; min-width: 0; }
+        .video-title { font-size: 0.9rem; line-height: 1.4; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .video-channel { font-size: 0.8rem; color: #888; }
+        .count { font-size: 0.75rem; color: #555; margin-left: 8px; }
+        .no-results { text-align: center; color: #888; padding: 40px; }
+        .updated { text-align: center; color: #555; font-size: 0.75rem; padding: 12px; }
+        @media (max-width: 480px) { .thumbnail { width: 90px; height: 51px; } h1 { font-size: 1.2rem; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>チェロ マスタークラス・公開レッスン</h1>
+        <p class="subtitle">YouTube動画を作曲家別に整理</p>
+    </header>
+    <div class="search-section">
+        <input type="text" id="searchBox" placeholder="作曲家名や曲名で検索..." oninput="renderVideos()">
+    </div>
+    <div class="alpha-nav" id="alphaNav"></div>
+    <div class="content" id="content">
+        <p class="no-results">データを読み込み中...</p>
+    </div>
+    <p class="updated" id="updated"></p>
+
+    <script>
+        let allVideos = [];
+        let activeAlpha = null;
+
+        fetch('videos.json?t=' + Date.now())
+            .then(r => r.json())
+            .then(data => {
+                allVideos = data.videos || [];
+                document.getElementById('updated').textContent = data.lastUpdated ? '最終更新: ' + data.lastUpdated : '';
+                buildAlphaNav();
+                renderVideos();
+            })
+            .catch(() => {
+                document.getElementById('content').innerHTML = '<p class="no-results">データの読み込みに失敗しました。</p>';
+            });
+
+        function buildAlphaNav() {
+            const letters = [...new Set(allVideos.map(v => v.composer.charAt(0).toUpperCase()))].sort();
+            const nav = document.getElementById('alphaNav');
+            nav.innerHTML = '<button class="alpha-btn active" onclick="setAlpha(null, this)">すべて</button>';
+            letters.forEach(l => {
+                nav.innerHTML += '<button class="alpha-btn" onclick="setAlpha(\'' + l + '\', this)">' + l + '</button>';
+            });
+        }
+
+        function setAlpha(letter, el) {
+            activeAlpha = letter;
+            document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            renderVideos();
+        }
+
+        function renderVideos() {
+            const q = document.getElementById('searchBox').value.toLowerCase();
+            let filtered = allVideos.filter(v => {
+                const matchSearch = !q || v.composer.toLowerCase().includes(q) || (v.composerJa || '').includes(q) || v.title.toLowerCase().includes(q);
+                const matchAlpha = !activeAlpha || v.composer.charAt(0).toUpperCase() === activeAlpha;
+                return matchSearch && matchAlpha;
+            });
+
+            if (filtered.length === 0) {
+                document.getElementById('content').innerHTML = '<p class="no-results">動画が見つかりません。</p>';
+                return;
+            }
+
+            const groups = {};
+            filtered.forEach(v => {
+                const key = v.composer;
+                if (!groups[key]) groups[key] = { composerJa: v.composerJa || '', videos: [] };
+                groups[key].videos.push(v);
+            });
+
+            const sorted = Object.keys(groups).sort();
+            let html = '';
+            sorted.forEach(composer => {
+                const g = groups[composer];
+                html += '<div class="composer-section"><div class="composer-name">' + escHtml(composer) +
+                    '<span>' + escHtml(g.composerJa) + '</span>' +
+                    '<span class="count">' + g.videos.length + '本</span></div>';
+                g.videos.forEach(v => {
+                    const m = v.url.match(/[?&]v=([^&]+)/);
+                    const thumb = m ? 'https://img.youtube.com/vi/' + m[1] + '/mqdefault.jpg' : '';
+                    html += '<a class="video-card" href="' + escHtml(v.url) + '" target="_blank" rel="noopener">' +
+                        '<img class="thumbnail" src="' + escHtml(thumb) + '" alt="" onerror="this.style.background=\'#0f3460\'">' +
+                        '<div class="video-info"><div class="video-title">' + escHtml(v.title) + '</div>' +
+                        '<div class="video-channel">' + escHtml(v.channel || '') + '</div></div></a>';
+                });
+                html += '</div>';
+            });
+            document.getElementById('content').innerHTML = html;
+        }
+
+        function escHtml(s) {
+            return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+    </script>
+</body>
+</html>
